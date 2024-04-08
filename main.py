@@ -7,24 +7,24 @@ from utils import getLoginCredentials, login, get_disciplinasRestantes, extract_
 
 options = Options()
 options.add_experimental_option("detach", True)
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+navegador = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 matricula, senha = getLoginCredentials()
 
-driver.get("https://www.alunoonline.uerj.br/requisicaoaluno/")
-driver.maximize_window()
+navegador.get("https://www.alunoonline.uerj.br/requisicaoaluno/")
+navegador.maximize_window()
 
-login(driver, matricula, senha)
+login(navegador, matricula, senha)
 
-disciplinasRestantes = get_disciplinasRestantes(driver)
+disciplinasRestantes = get_disciplinasRestantes(navegador)
 
 dados = []
 for linha in disciplinasRestantes:
     colunas = extract_data(linha)
     dados.append(colunas)
 
-df = pd.DataFrame(dados, columns=["Disciplina", "Período", "Atendida?", "Tipo", "Ramif.", "Cred.", "CH Total", "Trava credito"])
+df = pd.DataFrame(dados, columns=["Disciplina", "Período", "Atendida?"])
 
 print(df)
 
-driver.quit()
+navegador.quit()
