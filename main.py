@@ -3,7 +3,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
-import sys
 from utils import getLoginCredentials, login, get_disciplinasRestantes, extract_data
 
 options = Options()
@@ -28,4 +27,4 @@ df = pd.DataFrame(dados, columns=["Disciplina", "Período", "Atendida?", "Tipo",
 
 print(df)
 
-sys.exit()
+driver.quit()
